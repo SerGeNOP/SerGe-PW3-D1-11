@@ -109,11 +109,10 @@ def repeated_tasks():
     """ Функция проверяет задачи на совпадение на всей доске
         и при совпадении запрашивает перемещение или удаление
     """
-    list_rep = []       #сюда поместим ключ - id колонки и [task_id, имя задачи]
-    comp_task = []
-    # заполним dict_rep
+    list_rep = []       #сюда поместим task_id, имя задачи и имя столбца, в котором задача
+    # заполним list_rep
     column_data = requests.get(base_url.format('boards') + '/' + board_id + '/lists', params=auth_params).json()
-        # Теперь выведем название каждой колонки и всех заданий, которые к ней относятся:
+    # Теперь выведем название каждой колонки и всех заданий, которые к ней относятся:
     for column in column_data:
         # Получим данные всех задач в колонке и перечислим все названия
         task_data = requests.get(base_url.format('lists') + '/' + column['id'] + '/cards', params=auth_params).json()
@@ -122,9 +121,10 @@ def repeated_tasks():
         for task in task_data:
             clean_name, _ = clean_column_name(column['name'])
             list_rep.append([task['id'], task['name'], clean_name])
-    for _ in range(len(list_rep)):
+
+    #for _ in range(len(list_rep)):
         for task1 in list_rep:
-            flag = 0
+            flag = 0 #поднятый флаг показывает необходимость перечитать эталонную задачу для сравнения (task1)
             for task2 in list_rep:
                 if task1[0] == task2[0]:
                     continue
