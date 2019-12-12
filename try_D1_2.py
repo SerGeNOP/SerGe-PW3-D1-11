@@ -146,7 +146,8 @@ def repeated_tasks():
                     flag = 1
                 if not flag:
                     break
-
+    for column in column_data:
+        task_in_title(column)
 
 if __name__ == "__main__":
     if len(sys.argv) <= 2:
