@@ -122,7 +122,7 @@ def repeated_tasks():
             clean_name, _ = clean_column_name(column['name'])
             list_rep.append([task['id'], task['name'], clean_name])
 
-    #for _ in range(len(list_rep)):
+        #удалим совпадения через запрос пользователю в консоль
         for task1 in list_rep:
             flag = 0 #поднятый флаг показывает необходимость перечитать эталонную задачу для сравнения (task1)
             for task2 in list_rep:
