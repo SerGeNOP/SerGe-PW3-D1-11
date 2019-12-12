@@ -124,7 +124,7 @@ def repeated_tasks():
 
         #удалим совпадения через запрос пользователю в консоль
         for task1 in list_rep:
-            flag = 0 #поднятый флаг показывает необходимость перечитать эталонную задачу для сравнения (task1)
+            flag = 0 #опущенный флаг показывает необходимость перечитать эталонную задачу для сравнения (task1)
             for task2 in list_rep:
                 if task1[0] == task2[0]:
                     continue
@@ -135,12 +135,12 @@ def repeated_tasks():
                         if choice == 1:
                             requests.delete(base_url.format('cards') + '/' + task1[0], params=auth_params)
                             list_rep.remove(task1)
-                            flag = 0
+                            flag = 0            #внесено изменение в список задач - перечитываем этот список заново
                             break
                         elif choice == 2:
                             requests.delete(base_url.format('cards') + '/' + task2[0], params=auth_params)
                             list_rep.remove(task2)
-                            flag = 0
+                            flag = 0        #внесено изменение в список задач - перечитываем этот список заново
                             break
                 else:
                     flag = 1
